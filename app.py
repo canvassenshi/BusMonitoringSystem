@@ -17,7 +17,7 @@ mysql = MySQL(app)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-	msg=requests.get("https://api.thingspeak.com/channels/2008032/feeds.json?results=2")
+	msg=requests.get(THINGSPEAK API)
 	msg=msg.json()['feeds'][-1]['field1']
 	print(msg)
 	# return redirect(url_for("index"))
@@ -69,10 +69,10 @@ def register():
 
 @app.route('/sent', methods = ['GET', 'POST'])
 def sent():
-     account_sid = 'AC9e65e022f10cc8fbbd92eeca5d4abf33'
-     auth_token = '3de939067967a7544f72736ba1b7cd3b'
+     account_sid = AUTH_SSID
+     auth_token = AUTH_TOKEN
      client = Client(account_sid, auth_token)
-     message = client.messages.create(from_='+15715729852', body ='Bus On Route #1 is on the way.', to ='+918016786060')
+     message = client.messages.create(from_=SENDNUM, body ='Bus On Route #1 is on the way.', to = NUMBER)
      return render_template('sent.html')
 
 
